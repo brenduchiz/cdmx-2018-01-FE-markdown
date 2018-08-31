@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/brenduchiz/cdmx-2018-01-FE-markdown/issues"
   },
-  "homepage": "https://github.com/brenduchiz/cdmx-2018-01-FE-markdown#readme"
+  "homepage": "https://github.com/brenduchiz/cdmx-2018-01-FE-markdown#readme",
+  "dependencies": {
+    "node-modules": "^1.0.1"
+  }
 }
