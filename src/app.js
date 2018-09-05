@@ -2,32 +2,26 @@
 const path = require('path');
 var fs = require('fs');
 
+
 // Ruta para buscar el archivo.
 
-/* const mdLinks = (file) => {
-  if (path.isAbsolute(file) !== true) {
+const route = (routeFile) => {
+  if (path.isAbsolute(routeFile) !== true) {
     // Conversion ruta absoluta.
-    let fileAbsolut = path.resolve(file);
-   
-   console.log(fileAbsolut);
+    
+    routeAbsolut = path.resolve(routeFile);
+    console.log(routeAbsolut);
   } else {
-
-
-    // let  resolve = require('path').resolve
-    fs.readFile(file, function(err, md) {
-      if (err) {
-        console.log(err);
-      }
-      console.log(md.toString());
-      // console.log(archivo)
-    });
+    routeAbsolut = routefile;
   }
+  return routeAbsolut;
 };
 
-mdLinks('./README.md');*/
+route('./README.md');
 
 
-fs.readFile('../README.md', 'utf8', function(err, data) {
+/* fs.readFile('../README.md', 'utf8', function(err, data) {
+  
   if (err) throw err;
   let dataReco = '';
   for (let i = 0; i < data.length; i++) {
@@ -38,7 +32,7 @@ fs.readFile('../README.md', 'utf8', function(err, data) {
 
   // console.log(dataReco)
 
-  var expression = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
+ let expression = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
   var regex = new RegExp(expression);
   var cadena = dataReco;
 
@@ -48,8 +42,8 @@ fs.readFile('../README.md', 'utf8', function(err, data) {
   } else {
     console.log('No match');
   }
-});
+});*/
 
+// console.log(process.cwd ())
 
-console.log(process.cwd());
 
