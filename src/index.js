@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 let routeAbsolute;
 const path = require('path');
-var fs = require('fs');
-// const fetch = require('node-fetch');
+const fs = require('fs');
+const fetch = require('node-fetch');
 
 // Ruta 
 
-let prueba = process.argv[1];
+// let prueba = process.argv[1];
 // console.log(prueba);
-fs.readdir('./js', (err, items) =>{
+/* fs.readdir('./js', (err, items) =>{
   if (err) {
     console.log(error); 
   } else {
@@ -16,13 +16,7 @@ fs.readdir('./js', (err, items) =>{
     const result = arrayExtension.filter(arrayExtension => path.extname(arrayExtension) === '.md');
     console.log(result);
   }
-});
-
-
-
-
-
-
+});*/
 
 
 const route = (routeFile, callBack) => {
@@ -73,6 +67,51 @@ const data = (readLinks) => {
     };
     return datainfo;
   });
-  console.log(dataArray);
+
+  arrayLinkStatus(dataArray);
   return dataArray;
 };
+
+
+arrayLinkStatus = (dataArray) =>{
+  let arrayLinks = [];
+  dataArray.forEach(function(element) {
+    let objectLinks = element;
+  
+    let Links = Object.values(objectLinks);
+    arrayLinks.push(Links[0]);
+  });
+  
+  for (let i = 0; i < arrayLinks.length; i++) {
+		 fetchStatus(arrayLinks[i]);
+  }
+};
+
+fetchStatus = (linksArray)=>{
+  let urlStatus = [];
+  
+
+  fetch(linksArray).then(resolve => {
+    if (resolve.status === 404) {
+      urlStatus.push({ 
+        href: linksArray,
+        status: 'Liga rota '
+      });
+    } else { 
+      urlStatus.push({ 
+        href: linksArray,
+        status: 'Liga activa'  
+      });
+    }
+    return urlStatus;
+  })
+  
+    .then(statusLinks => { 
+      console.log(statusLinks);
+    })
+    .catch(error => {
+      console.log('Error', error);
+    });
+};
+
+
