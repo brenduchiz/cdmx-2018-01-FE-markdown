@@ -55,53 +55,41 @@ const regularExp = (cadena)=> {
 const data = (readLinks) => {
   let dataArray = readLinks.map((item) =>{
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
-  
-
-    
-  
    
     
-    fetchStatus(newArray)
-     
-   
-  
-    
+    fetchStatus(newArray);
   });
-
 
 
   return dataArray;
 };
 
 let fetchStatus = (newArray) => {
-  let urlsArray = []; 
-fetch(newArray[2])
+  let linksArray = []; 
+  fetch(newArray[2])
 
-.then(resolve => {
-  if (resolve.status === 404) {
-    urlsArray.push({ 
-      hrf: newArray[2],
-      text: newArray[1],
-      file: routeAbsolute,
-      status: 'Error, url rota'
+    .then(resolve => {
+      if (resolve.status === 404) {
+        linksArray.push({ 
+          hrf: newArray[2],
+          text: newArray[1],
+          file: routeAbsolute,
+          status: 'Link roto'
+        });
+      } else { 
+        linksArray.push({ 
+          hrf: newArray[2],
+          text: newArray[1],
+          file: routeAbsolute,
+          status: 'Link activo'  
+        });
+      }
+      return linksArray;
+    })
+    .then(result => { 
+      console.log(result);
+    })
+    .catch(error => {
+      console.log('Error', error);
     });
-  }
-  else { 
-    urlsArray.push({ 
-      hrf: newArray[2],
-      text: newArray[1],
-      file: routeAbsolute,
-      status:' Ok, url activa'  
-    });
-  }
-  return urlsArray;
-})
-.then(post => { 
-  console.log(post);
-})
-.catch(error => {
-  console.log('Error', error);
-});
-
-
 };
