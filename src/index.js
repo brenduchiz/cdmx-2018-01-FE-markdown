@@ -57,36 +57,51 @@ const data = (readLinks) => {
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
   
 
-    let datainfo = {
-      
-      text: newArray[1],
-      file: routeAbsolute
-    };
-  
-    const arrayLink = newArray[2];
-
-
-    fetch(arrayLink).then(resolve => {
-      if (resolve.status === 404) {
-        datainfo['hrf'] = arrayLink;
-        datainfo['status'] = 'Liga rota ';
-      } else { 
-        datainfo['hrf'] = arrayLink;
-        datainfo['status'] = 'Liga activa';
-      }
-     
-      return datainfo;
-    })
     
-      .then(statusLinks => { 
-        console.log(statusLinks);
-      })
-      .catch(error => {
-        console.log('Error', error);
-      });
+  
+   
+    
+    fetchStatus(newArray)
+     
+   
+  
+    
   });
+
+
 
   return dataArray;
 };
 
+let fetchStatus = (newArray) => {
+  let urlsArray = []; 
+fetch(newArray[2])
 
+.then(resolve => {
+  if (resolve.status === 404) {
+    urlsArray.push({ 
+      hrf: newArray[2],
+      text: newArray[1],
+      file: routeAbsolute,
+      status: 'Error, url rota'
+    });
+  }
+  else { 
+    urlsArray.push({ 
+      hrf: newArray[2],
+      text: newArray[1],
+      file: routeAbsolute,
+      status:' Ok, url activa'  
+    });
+  }
+  return urlsArray;
+})
+.then(post => { 
+  console.log(post);
+})
+.catch(error => {
+  console.log('Error', error);
+});
+
+
+};
