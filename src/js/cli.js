@@ -4,10 +4,10 @@ const mdLinks = require('./index');
 const program = require('commander');
 
 const exeMdLinks = (path, options) => {
-  mdLinks(path, options).then( data => {
-    console.log(data)
-  })
-} 
+  mdLinks(path, options).then(data => {
+    console.log(data);
+  });
+}; 
 
 program
   .version('1.0.2')

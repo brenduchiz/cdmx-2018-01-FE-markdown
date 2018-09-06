@@ -58,58 +58,35 @@ const data = (readLinks) => {
   
 
     let datainfo = {
-      href: newArray[2],
+      
       text: newArray[1],
       file: routeAbsolute
     };
-    return datainfo;
-  });
-
-  arrayLinkStatus(dataArray);
-  return dataArray;
-};
-
-
-arrayLinkStatus = (dataArray) =>{
-  let arrayLinks = [];
-  dataArray.forEach(function(element) {
-    let objectLinks = element;
   
-    let Links = Object.values(objectLinks);
-    arrayLinks.push(Links[0]);
-  });
-  
-  for (let i = 0; i < arrayLinks.length; i++) {
-		 fetchStatus(arrayLinks[i]);
-  }
-};
+    const arrayLink = newArray[2];
 
 
-fetchStatus = (linksArray)=>{
-  let urlStatus = [];
-  
-
-  fetch(linksArray).then(resolve => {
-    if (resolve.status === 404) {
-      urlStatus.push({ 
-        href: linksArray,
-        status: 'Liga rota '
-      });
-    } else { 
-      urlStatus.push({ 
-        href: linksArray,
-        status: 'Liga activa'  
-      });
-    }
-    return urlStatus;
-  })
-  
-    .then(statusLinks => { 
-      console.log(statusLinks);
+    fetch(arrayLink).then(resolve => {
+      if (resolve.status === 404) {
+        datainfo['hrf'] = arrayLink;
+        datainfo['status'] = 'Liga rota ';
+      } else { 
+        datainfo['hrf'] = arrayLink;
+        datainfo['status'] = 'Liga activa';
+      }
+     
+      return datainfo;
     })
-    .catch(error => {
-      console.log('Error', error);
-    });
+    
+      .then(statusLinks => { 
+        console.log(statusLinks);
+      })
+      .catch(error => {
+        console.log('Error', error);
+      });
+  });
+
+  return dataArray;
 };
 
 
