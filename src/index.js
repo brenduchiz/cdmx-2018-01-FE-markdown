@@ -61,9 +61,6 @@ const data = (readLinks) => {
       href: newArray[2],
       text: newArray[1],
       file: routeAbsolute
-      // status: err.code,
-      // line: line,
-      // validate: false
     };
     return datainfo;
   });
@@ -86,6 +83,7 @@ arrayLinkStatus = (dataArray) =>{
 		 fetchStatus(arrayLinks[i]);
   }
 };
+
 
 fetchStatus = (linksArray)=>{
   let urlStatus = [];
