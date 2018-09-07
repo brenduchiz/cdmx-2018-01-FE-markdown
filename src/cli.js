@@ -1,32 +1,38 @@
 #!/usr/bin/env node
 
-const mdLinks = require('./index');
-const program = require('commander');
+// const mdLinks = require('./index');
 
-const exeMdLinks = (path, options) => {
- console.log(path)
-} 
-
-program
-  .version('1.0.4', ' -v, --version ' )
-  .arguments('<path>')
-  .option('-val, --validate', 'HTTP request to find out if the link works or not')
-  .option('-s, --stats', 'basic statistics about links')
-  .action(exeMdLinks);
-program.parse(process.argv);
-
-
-
-
-
-  /*.command('md-links', 'Validar Links dentro de tu archivo .md', {
-    validate: {
-      demand: true,
-      alias: 'val'
+const argv = require('yargs')
+  .options({
+    '_': {
+      type: 'string',
+      description: 'Path to search markdown in',
+      demandOption: 'true',
+    },
+    'validate': {
+      type: 'boolean',
+      default: 'false',
+      description: 'Valida los links de un archivo markdown'
+    },
+    'stats': {
+      type: 'boolean',
+      default: 'false',
+      description: 'Muestra estadisticas básicas sobre los links encotrados en el archivo markdown'
     }
   })
 
+  .help()
   .argv;
 
+//console.log(argv._[0]);//argumento
 
-console.log(argv);*/
+
+if (argv.validate) {
+  console.log('validate');
+} else if (argv.stats) {
+  console.log('stats');
+}
+else {
+
+  console.log(argv._[0])
+}
