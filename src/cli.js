@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 
-// const mdLinks = require('./index');
+const mdLinks = require('./index');
 
 const argv = require('yargs')
   .options({
-    '_': {
-      type: 'string',
-      description: 'Path to search markdown in',
-      demandOption: 'true',
-    },
+    
     'validate': {
       type: 'boolean',
       default: 'false',
@@ -24,15 +20,18 @@ const argv = require('yargs')
   .help()
   .argv;
 
-//console.log(argv._[0]);//argumento
+// console.log(argv._[0]);//argumento
 
 
 if (argv.validate) {
   console.log('validate');
 } else if (argv.stats) {
   console.log('stats');
+} else {
+  mdLinks(argv._[0]);
 }
-else {
 
-  console.log(argv._[0])
-}
+
+// .then( data => {
+// console.log(data)
+// })

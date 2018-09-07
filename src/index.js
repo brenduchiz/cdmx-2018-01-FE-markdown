@@ -57,14 +57,14 @@ const data = (readLinks) => {
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
    
     
-    fetchStatus(newArray);
+   // fetchStatus(newArray);
   });
 
 
   return dataArray;
 };
 
-let fetchStatus = (newArray) => {
+/*let fetchStatus = (newArray) => {
   let linksArray = []; 
   fetch(newArray[2])
 
@@ -92,32 +92,12 @@ let fetchStatus = (newArray) => {
     .catch(error => {
       console.log('Error', error);
     });
-};
-
-
-/* const mdLinks = (path, options) => {
-  return new Promise((resolve, reject) => {
-    fs.stat(path, (err, stat) => {
-      if (err) return reject(err.code);
-
-      if (stat && stat.isDirectory()) {
-        readDirectory(path, (err, results) => {
-          
-          if (err) return reject(err.code);
-          loopFile(results, options, (err, results) => {
-            if (err) return reject(err.code);
-            return resolve(results);
-          });
-        });
-      } else {
-        resolveFile(path, (err, results) => {
-          if (err) return reject(err.code);
-          return resolve(selectOptions(results, options));
-        });
-      }
-    });
-  });
 };*/
 
 
-// module.exports = mdLinks;
+const mdLinks = (path) => {
+  console.log(path);
+};
+
+
+module.exports = mdLinks;
