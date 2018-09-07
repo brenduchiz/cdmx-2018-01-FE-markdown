@@ -57,14 +57,14 @@ const data = (readLinks) => {
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
    
     
-   // fetchStatus(newArray);
+   fetchStatus(newArray);
   });
 
 
   return dataArray;
 };
 
-/*let fetchStatus = (newArray) => {
+let fetchStatus = (newArray) => {
   let linksArray = []; 
   fetch(newArray[2])
 
@@ -92,7 +92,7 @@ const data = (readLinks) => {
     .catch(error => {
       console.log('Error', error);
     });
-};*/
+};
 
 
 const mdLinks = (path) => {
