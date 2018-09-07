@@ -22,16 +22,19 @@ const argv = require('yargs')
 
 // console.log(argv._[0]);//argumento
 
-
 if (argv.validate) {
-  console.log('validate');
+ let validate = true;
+ mdLinks(argv._[0],validate)
 } else if (argv.stats) {
-  console.log('stats');
-} else {
-  mdLinks(argv._[0]);
+  let stats = false ;
+  mdLinks(argv._[0],stats)
 }
+
+
+
 
 
 // .then( data => {
 // console.log(data)
 // })
+//mdLinks(argv._[0],argv.stats);
