@@ -29,17 +29,6 @@ const route = (routeFile, callBack) => {
     console.log(error);
   }
 };
-  
-
-route('./README.md', (routeAbsolute) => {
-  fs.readFile(routeAbsolute, 'utf8', (err, file) => {
-    if (err) {
-      console.log('error');
-    } 
-    
-    regularExp(file);
-  });
-});
 
 
 // Regex
@@ -55,12 +44,17 @@ const regularExp = (cadena)=> {
 const data = (readLinks) => {
   let dataArray = readLinks.map((item) =>{
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
-   
-    
-   fetchStatus(newArray);
+
+    const data = {
+      hrf: newArray[2],
+      text: newArray[1]
+    };
+    fetchStatus(newArray);
+    console.log(data);
+    return data;
   });
-
-
+  
+  // console.log(dataArray);
   return dataArray;
 };
 
@@ -95,9 +89,26 @@ let fetchStatus = (newArray) => {
 };
 
 
-const mdLinks = (path) => {
-  console.log(path);
+const mdLinks = (path, options) => {
+  route(path, (routeAbsolute) => {
+    fs.readFile(routeAbsolute, 'utf8', (err, file) => {
+      if (err) {
+        console.log('error');
+      } 
+      
+      regularExp(file);
+    });
+  });
 };
 
 
-module.exports = mdLinks;
+module.exports = { 
+  
+  mdLinks,
+  route,
+  regularExp,
+  data
+
+
+};
+
