@@ -26,7 +26,7 @@ if (argv.validate) {
   mdLinks(argv._[0], 'validate');
 } else if (argv.stats) {
   mdLinks(argv._[0], 'stats');
-}else {
+} else {
   mdLinks(argv._[0], 'argumento');
 };
 
