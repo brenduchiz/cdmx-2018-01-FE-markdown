@@ -7,14 +7,14 @@ describe('regularExp', () => {
 });
 
 describe('data', () => {
-    test('Deberia ser una funcion', ()=>{
-      expect(typeof data).toEqual('function');
-    });
+  test('Deberia ser una funcion', ()=>{
+    expect(typeof data).toEqual('function');
   });
+});
 
-  describe('mdLinks', () => {
-    test('Deberia ser una funcion', ()=>{
-      expect(typeof mdLinks).toEqual('function');
-    });
+describe('mdLinks', () => {
+  test('Deberia ser una funcion', ()=>{
+    expect(typeof mdLinks).toEqual('function');
   });
+});
   

@@ -31,74 +31,83 @@ const route = (routeFile, callBack) => {
 };
 
 
-// Regex
-const regularExp = (cadena)=> {
+// Expresion resgular
+/* const regularExp = (cadena)=> {
   const expression = /\[([^\[\]]*)\]\(((https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}))\)/g;
   const regex = new RegExp(expression);
   // Array de strings
   const readLinks = cadena.match(regex);
-  data(readLinks);
-};
+  readLinks.forEach(function(array) {
+    console.log(array); // datos links 
+  });
+};*/
 
 
-const data = (readLinks) => {
+/* const data = (readLinks) => {
   let dataArray = readLinks.map((item) =>{
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
-
-    const data = {
-      hrf: newArray[2],
-      text: newArray[1]
-    };
-    fetchStatus(newArray);
-    console.log(data);
-    return data;
-  });
   
-  // console.log(dataArray);
-  return dataArray;
+  
+    fetchStatus(newArray);
+  });
 };
 
 let fetchStatus = (newArray) => {
-  let linksArray = []; 
+  let linksArray; 
   fetch(newArray[2])
 
     .then(resolve => {
       if (resolve.status === 404) {
-        linksArray.push({ 
+        linksArray = { 
           hrf: newArray[2],
           text: newArray[1],
           file: routeAbsolute,
           status: 'Link roto'
-        });
+        };
       } else { 
-        linksArray.push({ 
+        linksArray = { 
           hrf: newArray[2],
           text: newArray[1],
           file: routeAbsolute,
           status: 'Link activo'  
-        });
+        };
       }
       return linksArray;
     })
+    
     .then(result => { 
       console.log(result);
     })
     .catch(error => {
       console.log('Error', error);
     });
-};
+};*/
 
 
 const mdLinks = (path, options) => {
-  route(path, (routeAbsolute) => {
-    fs.readFile(routeAbsolute, 'utf8', (err, file) => {
-      if (err) {
-        console.log('error');
-      } 
-      
-      regularExp(file);
+  if (options === 'argumento') {
+    // First Option
+    route(path, (routeAbsolute) => {
+      fs.readFile(routeAbsolute, 'utf8', (err, file) => {
+        if (err) {
+          console.log('error');
+        } 
+  
+        const expression = /\[([^\[\]]*)\]\(((https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}))\)/g;
+        const regex = new RegExp(expression);
+        // Array de strings
+        const readLinks = file.match(regex);
+        readLinks.forEach(function(array) {
+          console.log(array); // datos links 
+          // data(readLinks);
+        });
+      });
     });
-  });
+  } else if (options === 'validate') {
+    console.log(options);
+  } else if (options === 'stats') {
+    console.log(options);
+  }
 };
 
 
@@ -106,8 +115,8 @@ module.exports = {
   
   mdLinks,
   route,
-  regularExp,
-  data
+  // regularExp,
+  // data
 
 
 };
