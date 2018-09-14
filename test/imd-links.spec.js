@@ -1,10 +1,5 @@
 const {route, regularExp, data, mdLinks} = require('../src/index');
 
-describe('regularExp', () => {
-  test('Deberia ser una funcion', ()=>{
-    expect(typeof regularExp).toEqual('function');
-  });
-});
 
 describe('data', () => {
   test('Deberia ser una funcion', ()=>{

@@ -31,19 +31,7 @@ const route = (routeFile, callBack) => {
 };
 
 
-// Expresion resgular
-/* const regularExp = (cadena)=> {
-  const expression = /\[([^\[\]]*)\]\(((https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}))\)/g;
-  const regex = new RegExp(expression);
-  // Array de strings
-  const readLinks = cadena.match(regex);
-  readLinks.forEach(function(array) {
-    console.log(array); // datos links 
-  });
-};*/
-
-
-/* const data = (readLinks) => {
+const data = (readLinks) => {
   let dataArray = readLinks.map((item) =>{
     const newArray = item.split(/\[([^[\]]*)\]\(([^()]*)\)/g);
   
@@ -81,7 +69,7 @@ let fetchStatus = (newArray) => {
     .catch(error => {
       console.log('Error', error);
     });
-};*/
+};
 
 
 const mdLinks = (path, options) => {
@@ -99,7 +87,7 @@ const mdLinks = (path, options) => {
         const readLinks = file.match(regex);
         readLinks.forEach(function(array) {
           console.log(array); // datos links 
-          // data(readLinks);
+          data(readLinks);
         });
       });
     });
@@ -115,8 +103,7 @@ module.exports = {
   
   mdLinks,
   route,
-  // regularExp,
-  // data
+  data
 
 
 };
